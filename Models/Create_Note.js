@@ -1,7 +1,5 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
-const NoteSchema = Schema({
-    Note{
-        type: String,
-    };
+const NoteSchema = new Schema({
+    id: {type: Number},
 });
