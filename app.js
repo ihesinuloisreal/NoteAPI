@@ -1,12 +1,14 @@
 const express = require("express")
 const cors = require("cors")
 const app = express();
+const noteRoute = require("./Router/Note")
 
 app.use(cors())
 
-app.get("/",(req, res) => {
-    res.send("Hello World");
-})
+app.use(("/user"),noteRoute)
+// app.get("/",(req, res) => {
+//     res.send("Hello World");
+// })
 
 port = process.env.PORT || 8080
 
