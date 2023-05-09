@@ -8,9 +8,12 @@ const pool = createPool({
     connectionLimit: 10
 })
 
+let sql = `INSERT INTO note (title, text, color, date) VALUE ?;`;
+
 
 
 module.exports = {
+    
     get: (req, res, next) => {
         pool.query('select name from note', (err, result, fields)=> {
             if(err){
@@ -21,8 +24,12 @@ module.exports = {
 
         })
     },
+    
     post: (req, res, next) => {
-        pool.query('insert into note (title, text, color, date) value (title, text,color,date)', (err, result, fields)=> {
+        console.log(req.body.data)
+        let {values} = req.body
+
+        pool.query(sql,values, (err, result, fields)=> {
             if(err){
                 res.send(err);
             }
