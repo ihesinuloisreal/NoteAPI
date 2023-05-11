@@ -14,26 +14,22 @@ const { createPool} = require("mysql");
 module.exports = {
     
     get: (req, res, next) => {
-        // pool.query('select name from note', (err, result, fields)=> {
-        //     if(err){
-        //         res.send(err);
-        //     }
-        //     // return console.log()
-        //     res.send("name = " +result[1].name)
-
-        // })
+        
     },
     
     post: (req, res, next) => {
-        // console.log(req.body.data)
+        // const note = req.body
 
-        // pool.query("INSERT INTO note (title, text, color, date) VALUE (title, )", (err, result, fields)=> {
-        //     if(err){
-        //         res.send(err);
-        //     }
-        //     // return console.log("")
-        //     res.send('Successful')
-
-        // })
+        db.collection("notes")
+            .insertOnce({
+                title: "hello"
+            },(finerr, result) => {
+                if (error) {
+                    console.log(finerr)
+                }else{
+                    return result
+                }
+            }
+        )
     }
 }

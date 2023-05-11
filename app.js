@@ -2,10 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const noteRoute = require("./Router/Note")
-
 app.use(cors());
+app.use(express.json());
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://ihesinuloisreal:yahweh0852@note.7dlh5w0.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb://127.0.0.1:27017/";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -19,7 +19,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    await client.db("Note").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
