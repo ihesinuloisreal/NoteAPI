@@ -1,35 +1,24 @@
-const { createPool} = require("mysql");
-
-// const pool = createPool({
-//     host: "localhost",
-//     user: "root",
-//     password: "",
-//     database: "Note",
-//     connectionLimit: 10
-// })
-
-
-
-
-module.exports = {
-    
-    get: (req, res, next) => {
-        
-    },
-    
-    post: (req, res, next) => {
-        // const note = req.body
-
-        db.collection("notes")
-            .insertOnce({
-                title: "hello"
-            },(finerr, result) => {
-                if (error) {
-                    console.log(finerr)
-                }else{
-                    return result
-                }
-            }
-        )
+const Note = require("../Models/Create_Note")
+const createNote = async (noteData) => {
+    try {
+        const note = new Note(noteData);
+        await note.save();
+        return note;
+    } catch (err) {
+        console.error(err);
+        throw new Error('Failed to create user')
     }
-}
+};
+const getNote = async () => {
+    try {
+        const notes = await Note.find();
+        return notes;
+    } catch (err) {
+        console.error(err);
+        throw new Error('Failed to get notes')
+    }
+};
+module.exports = {
+    createNote,
+    getNote,
+};
