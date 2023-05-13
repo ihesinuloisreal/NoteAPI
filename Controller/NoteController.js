@@ -11,7 +11,7 @@ const createNote = async (noteData) => {
 };
 const getNote = async () => {
     try {
-        const notes = await Note.find({});
+        const notes = await Note.find();
         return console.log(notes);
     } catch (err) {
         console.error(err);
