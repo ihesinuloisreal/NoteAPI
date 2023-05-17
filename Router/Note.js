@@ -6,13 +6,13 @@ const controller = require("../Controller/NoteController")
 router.get('/note', async (req, res) => {
     try {
         const note = await controller.getNote();
-        res.json(note);
+        res.send(note);
     } catch (err) {
         console.error('failed: ', err);
     } 
     // console.log("Hello")
 })
-router.get('/send', async (req, res) => {
+router.post('/send', async (req, res) => {
     const noteData = req.body;
     try {
         const note = controller.createNote(noteData)
@@ -21,4 +21,5 @@ router.get('/send', async (req, res) => {
         console.error('Failed',err)
     }
 })
+router.delete('/delete/:id', controller.deleteNote)
 module.exports = router;

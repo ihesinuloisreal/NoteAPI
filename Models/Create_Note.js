@@ -1,9 +1,10 @@
 const mongoose = require("mongoose")
 const { Schema } = mongoose;
 const NoteSchema = new Schema({
-    title: {type: String, required: true,},
-    text: {type: String, required: true,},
-    color: {type: String, required: true,},
+    // id: {type: Number},
+    title: {type: String, },
+    text: {type: String, },
+    color: {type: String, },
     createdAt: {type: Date, default: Date.now,},
 });
 
