@@ -12,26 +12,30 @@ const createNote = async (noteData) => {
 const getNote = async () => {
     try {
         const notes = await Note.find();
-        console.log(notes);
-        return notes;
+        if (notes) {
+            return notes;
+        }
+        // console.log(notes);
     } catch (err) {
         console.error(err);
         throw new Error('Failed to get notes')
     }
 };
 const deleteNote = async (req, res) => {
-    const id = req.body.id;
+    const id = req.params.id;
     try {
         const notes = await Note.findByIdAndDelete(id);
-        if (notes) {
+        if (notes){
             console.log("note deleted");
         } else {
-            console.log("Issue deleting")
+            console.log(id);
         }
         return notes;
+        // console.log(id)
+
     } catch (err) {
         console.error(err);
-        throw new Error('Failed to get notes')
+        throw new Error('Failed to get notes');
     }
 };
 module.exports = {
