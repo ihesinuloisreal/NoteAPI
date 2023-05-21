@@ -31,5 +31,17 @@ router.put('/update/:id', async (req, res) => {
         console.error
     }
 })
+router.get('/find/:id', async (req, res) => {
+    const id = req.body.id;
+    try {
+        const record = await controller.findRecord(id)
+        if (!id) {
+            console.log("No Record found")
+        }
+        res.send(record)
+    } catch (err) {
+        console.error('Failed fetching data',err)
+    }
+})
 router.delete('/delete/:id', controller.deleteNote)
 module.exports = router;

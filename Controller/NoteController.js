@@ -52,9 +52,23 @@ const deleteNote = async (req, res) => {
         throw new Error('Failed to get notes');
     }
 };
+const findRecord = async (id) => {
+    try {
+        const note = await Note.findById(id);
+        if (!note) {
+            console.error("Error")
+        }
+        // const note = new Note(updatedData);
+        console.log("Record found")
+        // res.json(notes);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error'});
+    }
+}
 module.exports = {
     createNote,
     getNote,
     updateNote,
     deleteNote,
+    findRecord
 };
