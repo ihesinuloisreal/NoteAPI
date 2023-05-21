@@ -12,13 +12,27 @@ const createNote = async (noteData) => {
 const getNote = async () => {
     try {
         const notes = await Note.find();
-        if (notes) {
-            return notes;
+        if (notes.length === 0) {
+            return res.status(500).json({ error: 'Internal Server Error' });
         }
         // console.log(notes);
+        return notes;
     } catch (err) {
         console.error(err);
         throw new Error('Failed to get notes')
+    }
+};
+const updateNote = async (updatedData, id) => {
+    try {
+        const notes = await Note.findByIdAndUpdate(id, updatedData, {new: true });
+        if (!notes) {
+            return res.status(400).json({ error: 'Note not Found' });
+        }
+        // const note = new Note(updatedData);
+
+        res.json(notes);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error'});
     }
 };
 const deleteNote = async (req, res) => {
@@ -41,5 +55,6 @@ const deleteNote = async (req, res) => {
 module.exports = {
     createNote,
     getNote,
+    updateNote,
     deleteNote,
 };
